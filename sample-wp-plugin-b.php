@@ -2,8 +2,8 @@
 
 /**
 * @package wp plugin basic
-* Plugin Name: sample-wp-plugin-a
-* Description: El plugin mas basico.
+* Plugin Name: sample-wp-plugin-b
+* Description: Ejemplo para mostrar como enqueue scripts. con programacion funcional.
 */
 
 /*
@@ -36,8 +36,8 @@ if ( ! function_exists('add_action')) {
     echo 'Hey, you can\t access this file, you silly human!';
     die;
 }
-
-
+$enqueue= plugin_dir_path(__FILE__) . 'includes/enqueue.php';
+require_once $enqueue;
 function plugin_basic_activate_plugin() {
     flush_rewrite_rules();
 }
@@ -50,6 +50,10 @@ function plugin_basic_uninstall_plugin() {
 
 }
 
+function register( ) {
+enqueue_register();
+}
+register();
 register_activation_hook(__FILE__,'plugin_basic_activate_plugin');
 register_deactivation_hook(__FILE__,'plugin_basic_deactivate_plugin');
 register_uninstall_hook(__FILE__, 'plugin_basic_uninstall_plugin');
